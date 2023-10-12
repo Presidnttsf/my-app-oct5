@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+
 function AddUserForm({ onSubmit }) {
     const [user, setUser] = useState({
         profile: '',
@@ -8,7 +9,6 @@ function AddUserForm({ onSubmit }) {
         gender: '',
         email: '',
         phone: '',
-
     });
 
     const handleChange = (e) => {
@@ -21,14 +21,13 @@ function AddUserForm({ onSubmit }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
             const response = await axios.post('https://dummyjson.com/users', user);
 
             if (response.status === 200) {
                 const data = response.data;
                 console.log('User added:', data);
-                onSubmit(data); // You can also pass the response data to a callback if needed
+                onSubmit(data);
                 setUser({
                     profile: '',
                     firstName: '',
@@ -36,7 +35,6 @@ function AddUserForm({ onSubmit }) {
                     gender: '',
                     email: '',
                     phone: '',
-
                 });
             } else {
                 console.error('Failed to add user');
@@ -46,81 +44,99 @@ function AddUserForm({ onSubmit }) {
         }
     };
 
-
-
     return (
         <div>
             <h2>Add User</h2>
-            <form onSubmit={handleSubmit}>
-                {/* Form fields for user details */}
-                <div>
+            <form onSubmit={handleSubmit} style={formStyles}>
+                <div style={inputGroupStyles}>
                     <label>User Profile:</label>
                     <input
                         type="text"
                         name="profile"
                         value={user.profile}
                         onChange={handleChange}
+                        style={inputStyles}
                     />
                 </div>
-                <div>
+                <div style={inputGroupStyles}>
                     <label>First Name:</label>
                     <input
                         type="text"
                         name="firstName"
                         value={user.firstName}
                         onChange={handleChange}
+                        style={inputStyles}
                     />
                 </div>
-                <div>
+                <div style={inputGroupStyles}>
                     <label>Last Name:</label>
                     <input
                         type="text"
                         name="lastName"
                         value={user.lastName}
                         onChange={handleChange}
+                        style={inputStyles}
                     />
                 </div>
-                <div>
+                <div style={inputGroupStyles}>
                     <label>Gender:</label>
                     <input
                         type="text"
                         name="gender"
                         value={user.gender}
                         onChange={handleChange}
+                        style={inputStyles}
                     />
                 </div>
-                <div>
+                <div style={inputGroupStyles}>
                     <label>Email:</label>
                     <input
                         type="text"
                         name="email"
                         value={user.email}
                         onChange={handleChange}
+                        style={inputStyles}
                     />
                 </div>
-                <div>
+                <div style={inputGroupStyles}>
                     <label>Phone:</label>
                     <input
                         type="text"
                         name="phone"
                         value={user.phone}
                         onChange={handleChange}
+                        style={inputStyles}
                     />
                 </div>
-                <div>
-                    <label>State:</label>
-                    <input
-                        type="text"
-                        name="state"
-                        value={user.state}
-                        onChange={handleChange}
-                    />
-                </div>
-                <button type="submit">Add User</button>
+                <button type="submit" style={submitButtonStyles}>Add User</button>
             </form>
         </div>
     );
 }
 
-export default AddUserForm;
+const formStyles = {
+    maxWidth: '400px',
+    margin: '0 auto',
+};
 
+const inputGroupStyles = {
+    marginBottom: '15px',
+};
+
+const inputStyles = {
+    width: '100%',
+    padding: '10px',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+};
+
+const submitButtonStyles = {
+    backgroundColor: '#007bff',
+    color: 'white',
+    padding: '10px 15px',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+};
+
+export default AddUserForm;
