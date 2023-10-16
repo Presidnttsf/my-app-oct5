@@ -4,6 +4,7 @@ import AddUserForm from './AddUserForm';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './Navbar';
 import { Home } from './Home';
+import EditForm from './EditForm';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="/" exact Component={Home} />
             <Route path="/adduserform" Component={AddUserForm} />
             <Route path="/usertable" Component={UserTable} />
+            <Route path="/editform: id" Component={EditForm} />
           </Routes>
         </div>
       </div>
